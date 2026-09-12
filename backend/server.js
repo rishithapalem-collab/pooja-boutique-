@@ -63,13 +63,20 @@ app.get('/api/health', (req, res) => {
 // Global Error Handler
 app.use(errorHandler);
 
-// Run auto-seed and start server
-seed().then(() => {
-  app.listen(PORT, () => {
-    console.log(`=======================================================`);
-    console.log(` Pooja Boutique & Matching Centre REST API Server `);
-    console.log(` Running at: http://localhost:${PORT}`);
-    console.log(` Admin Portal API: http://localhost:${PORT}/api/auth/login`);
-    console.log(`=======================================================`);
+// Run auto-seed and start server if not running on Vercel serverless
+if (process.env.VERCEL !== '1') {
+  seed().then(() => {
+    app.listen(PORT, () => {
+      console.log(`=======================================================`);
+      console.log(` Pooja Boutique & Matching Centre REST API Server `);
+      console.log(` Running at: http://localhost:${PORT}`);
+      console.log(` Admin Portal API: http://localhost:${PORT}/api/auth/login`);
+      console.log(`=======================================================`);
+    });
   });
-});
+} else {
+  seed();
+}
+
+module.exports = app;
+
