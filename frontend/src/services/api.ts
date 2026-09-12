@@ -1,4 +1,6 @@
-const API_BASE = '/api';
+const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+  ? '/api' 
+  : 'https://pooja-boutique-backend-6y5b.onrender.com/api';
 
 function getAuthHeader() {
   const token = localStorage.getItem('token');

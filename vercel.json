@@ -1,23 +1,16 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "backend/server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/vite"
-    }
-  ],
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/backend/server.js"
+      "source": "/api/:path*",
+      "destination": "https://pooja-boutique-backend-6y5b.onrender.com/api/:path*"
+    },
+    {
+      "source": "/images/gen/:path*",
+      "destination": "https://pooja-boutique-backend-6y5b.onrender.com/images/gen/:path*"
     },
     {
       "source": "/(.*)",
-      "destination": "/frontend/$1"
+      "destination": "/index.html"
     }
   ]
 }
